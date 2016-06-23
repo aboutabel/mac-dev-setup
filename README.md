@@ -1,10 +1,6 @@
 # Mac OS X Dev Setup
 
-This document describes how I set up my developer environment on a new MacBook or iMac. We will set up [Node](http://nodejs.org/) (JavaScript), [Python](http://www.python.org/), and [Ruby](http://www.ruby-lang.org/) environments, mainly for JavaScript and Python development. Even if you don't program in all three, it is good to have them as many command-line tools use one of them. As you read  and follow these steps, feel free to send me any feedback or comments you may have.
 
-The document assumes you are new to Mac. The steps below were tested on **OS X Mountain Lion**.
-
-If you have any comments or suggestions, feel free to give me a shout [on Twitter](https://twitter.com/nicolahery)!
 
 - [System update](#system-update)
 - [System preferences](#system-preferences)
@@ -15,8 +11,7 @@ If you have any comments or suggestions, feel free to give me a shout [on Twitte
 - [Beautiful terminal](#beautiful-terminal)
 - [iTerm2](#iterm2)
 - [Git](#git)
-- [Sublime Text](#sublime-text)
-- [Vim](#vim)
+- [Sublime Text 3](#sublime-text)
 - [Python](#python)
 - [Virtualenv](#virtualenv)
 - [IPython](#ipython)
@@ -33,13 +28,7 @@ If you have any comments or suggestions, feel free to give me a shout [on Twitte
 - [Projects folder](#projects-folder)
 - [Apps](#apps)
 
-## System update
-
-First thing you need to do, on any OS actually, is update the system! For that: **Apple Icon > Software Update...**
-
 ## System preferences
-
-If this is a new computer, there are a couple tweaks I like to make to the System Preferences. Feel free to follow these, or to ignore them, depending on your personal preferences.
 
 In **Apple Icon > System Preferences**:
 
@@ -49,20 +38,12 @@ In **Apple Icon > System Preferences**:
 - Dock > Automatically hide and show the Dock
 
 ## Google Chrome
-
-Install your favorite browser, mine happens to be Chrome.
-
-Download from [www.google.com/chrome](https://www.google.com/intl/en/chrome/browser/). Open the **.dmg** file once it's done downloading (this will mount the disk image), and drag and drop the **Google Chrome** app into the Applications folder (on the Mac, most applications are installed this way). When done, you can unmount the disk in Finder (the small "eject" icon next to the disk under **Devices**).
+[www.google.com/chrome](https://www.google.com/intl/en/chrome/browser/). 
 
 ## iTerm2
+[iTerm2](http://www.iterm2.com/)
 
-Since we're going to be spending a lot of time in the command-line, let's install a better terminal than the default one. Download and install [iTerm2](http://www.iterm2.com/) (the newest version, even if it says "beta release").
-
-In **Finder**, drag and drop the **iTerm** Application file into the **Applications** folder.
-
-You can now launch iTerm, through the **Launchpad** for instance.
-
-Let's just quickly change some preferences. In **iTerm > Preferences...**, under the tab **General**, uncheck **Confirm closing multiple sessions** and **Confirm "Quit iTerm2 (Cmd+Q)" command** under the section **Closing**.
+ In **iTerm > Preferences...**, under the tab **General**, uncheck **Confirm closing multiple sessions** and **Confirm "Quit iTerm2 (Cmd+Q)" command** under the section **Closing**.
 
 In the tab **Profiles**, create a new one with the "+" icon, and rename it to your first name for example. Then, select **Other Actions... > Set as Default**. Finally, under the section **Window**, change the size to something better, like **Columns: 125** and **Rows: 35**.
 
@@ -213,11 +194,7 @@ To push code to your GitHub repositories, we're going to use the recommended HTT
 
 With the terminal, the text editor is a developer's most important tool. Everyone has their preferences, but unless you're a hardcore [Vim](http://en.wikipedia.org/wiki/Vim_(text_editor)) user, a lot of people are going to tell you that [Sublime Text](http://www.sublimetext.com/) is currently the best one out there.
 
-Go ahead and [download](http://www.sublimetext.com/) it. Open the **.dmg** file, drag-and-drop in the **Applications** folder, you know the drill now. Launch the application.
-
-**Note**: At this point I'm going to create a shortcut on the OS X Dock for both for Sublime Text and iTerm. To do so, right-click on the running application and select **Options > Keep in Dock**.
-
-Sublime Text is not free, but I think it has an unlimited "evaluation period". Anyhow, we're going to be using it so much that even the seemingly expensive $70 price tag is worth every penny. If you can afford it, I suggest you [support](http://www.sublimetext.com/buy) this awesome tool. :)
+Go ahead and [download](http://www.sublimetext.com/) it.
 
 Just like the terminal, let's configure our editor a little. Go to **Sublime Text 2 > Preferences > Settings - User** and paste the following in the file that just opened:
 
@@ -434,70 +411,7 @@ Open a fresh terminal. Now when you run `$ ipy`, it will launch the QT Console w
 
 To use the in-line Matplotlib functionality (nice for scientific computing), run `$ ipy --pylab=inline`.
 
-## Numpy and Scipy
 
-The [Numpy](http://numpy.scipy.org/) and [Scipy](http://www.scipy.org/SciPy) scientific libraries for Python are always a little tricky to install from source because they have all these dependencies they need to build correctly. Luckily for us, [Samuel John](http://www.samueljohn.de/) has put together some [Homebrew formulae](https://github.com/samueljohn/homebrew-python) to make it easier to install these Python libraries.
-
-First, grab the special formulae (which are not part of Homebrew core):
-
-    $ brew tap samueljohn/python
-    $ brew tap homebrew/science
-    
-Then, install the `gfortran` dependency (now in `gcc`) which we will need to build the libraries:
-
-    $ brew install gcc
-    
-Finally, you can install Numpy and Scipy with:
-
-    $ brew install numpy
-    $ brew install scipy
-    
-(It may take a few minutes to build.)
-
-## MySQL
-
-### Install
-
-We will install [MySQL](http://www.mysql.com/) using Homebrew, which will also install some header files needed for MySQL bindings in different programming languages (MySQL-Python for one).
-
-To install, run:
-
-    $ brew update # Always good to do
-    $ brew install mysql
-
-As you can see in the ouput from Homebrew, before we can use MySQL we first need to set it up with:
-
-    $ unset TMPDIR
-    $ mkdir /usr/local/var
-    $ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
-
-### Usage
-
-To start the MySQL server, use the `mysql.server` tool:
-
-    $ mysql.server start
-    
-To stop it when you are done, run:
-
-    $ mysql.server stop
-    
-You can see the different commands available for `mysql.server` with:
-
-    $ mysql.server --help
-    
-To connect with the command-line client, run:
-
-    $ mysql -uroot
-    
-(Use `exit` to quit the MySQL shell.)
-
-**Note**: By default, the MySQL user `root` has no password. It doesn't really matter for a local development database. If you wish to change it though, you can use `$ mysqladmin -u root password 'new-password'`.
-
-### MySQL Workbench
-
-In terms of a GUI client for MySQL, I'm used to the official and free [MySQL Workbench](http://www.mysql.com/products/workbench/). But feel free to use whichever you prefer.
-
-You can find the MySQL Workbench download [here](http://www.mysql.com/downloads/workbench/). (**Note**: It will ask you to sign in, you don't need to, just click on "No thanks, just start my download!" at the bottom.)
 
 ## Node.js
 
@@ -780,65 +694,7 @@ In another terminal, connect to the server with the Redis command-line interface
 
 I'll let you refer to Redis' [documentation](http://redis.io/documentation) or other tutorials for more information.
 
-## Elasticsearch
 
-As it says on the box, [Elasticsearch](http://www.elasticsearch.org/) is a "powerful open source, distributed real-time search and analytics engine". It uses an HTTP REST API, making it really easy to work with from any programming language.
-
-You can use elasticsearch for such cool things as real-time search results, autocomplete, recommendations, machine learning, and more.
-
-### Install
-
-Elasticsearch runs on Java, so check if you have it installed by running:
-
-```bash
-java -version
-```
-
-If Java isn't installed yet, a window will appear prompting you to install it. Go ahead and click "Install".
-
-Next, install elasticsearch with:
-
-```bash
-$ brew install elasticsearch
-```
-
-**Note**: Elasticsearch also has a `plugin` program that gets moved to your `PATH`. I find that too generic of a name, so I rename it to `elasticsearch-plugin` by running (will need to do that again if you update elasticsearch):
-
-```bash
-$ mv /usr/local/bin/plugin /usr/local/bin/elasticsearch-plugin
-```
-
-Below I will use `elasticsearch-plugin`, just replace it with `plugin` if you haven't followed this step.
-
-As you guessed, you can add plugins to elasticsearch. A popular one is [elasticsearch-head](http://mobz.github.io/elasticsearch-head/), which gives you a web interface to the REST API. Install it with:
-
-```bash
-$ elasticsearch-plugin --install mobz/elasticsearch-head
-```
-
-### Usage
-
-Start a local elasticsearch server with:
-
-```bash
-$ elasticsearch -f
-```
-
-(The `-f` option tells it to run in the foreground, so you can stop it with `Ctrl+C`.)
-
-Test that the server is working correctly by running:
-
-```bash
-$ curl -XGET 'http://localhost:9200/'
-```
-
-If you installed the elasticsearch-head plugin, you can visit its interface at `http://localhost:9200/_plugin/head/`.
-
-Elasticsearch's [documentation](http://www.elasticsearch.org/guide/) is more of a reference. To get started, I suggest reading some of the blog posts linked on this [StackOverflow answer](http://stackoverflow.com/questions/11593035/beginners-guide-to-elasticsearch/11767610#11767610).
-
-## Projects folder
-
-This really depends on how you want to organize your files, but I like to put all my version-controlled projects in `~/Projects`. Other documents I may have, or things not yet under version control, I like to put in `~/Dropbox` (if you have Dropbox installed), or `~/Documents`.
 
 ## Apps
 
