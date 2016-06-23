@@ -28,6 +28,10 @@
 - [Projects folder](#projects-folder)
 - [Apps](#apps)
 
+# Extensions
+[Edit This Cookie] (https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg?hl=en)
+
+
 ## System preferences
 
 In **Apple Icon > System Preferences**:
